@@ -32,6 +32,8 @@ jobs:
     - uses: actions/checkout@v3
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+    - name: Set env
+      run: echo "IMAGE_TAG=$(date +%s)" >> $GITHUB_ENV
     -
       name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v3
@@ -42,4 +44,4 @@ jobs:
         context: .
         file: ./Dockerfile
         push: true
-        tags: $(date +%s)
+        tags: ${IMAGE_TAG}
