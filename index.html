@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Uploader</title>
+</head>
+<body>
+    <h1>Image Uploader</h1>
+    <input type="file" id="fileInput" style="display: none;">
+    <button id="uploadButton" onclick="document.getElementById('fileInput').click()">Upload File</button>
+    <button id="clearButton" onclick="clearFiles()">Clear</button>
+    <div id="imageContainer">
+        {% for filename in filenames %}
+            <img src="/uploads/{{ filename }}">
+        {% endfor %}
+    </div>
+    <script src="script.js">
+        var filenames;
+    </script>
+</body>
+</html>
