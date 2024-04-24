@@ -7,6 +7,9 @@ WORKDIR /app
 # Copy the current directory contents into the container at /app
 COPY . /app
 
+# Create a folder named 'my_folder'
+RUN mkdir uploads
+
 # Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir Flask
 
