@@ -34,9 +34,9 @@ jobs:
       run: |
           TOKEN=$(az acr login --name imageuploaderregistry --expose-token --output tsv --query accessToken)
           docker login imageuploaderregistry.azurecr.io --username 00000000-0000-0000-0000-000000000000 --password-stdin <<< $TOKEN
-          docker build . --file Dockerfile --tag my-image-name:v1
-          docker tag my-image-name:v1 imageuploaderregistry.azurecr.io/image:v1
-          docker push imageuploaderregistry.azurecr.io/image:v1
+          docker build . --file Dockerfile --tag my-image-name:${{ github.sha }}
+          docker tag my-image-name:${{ github.sha }} imageuploaderregistry.azurecr.io/image:${{ github.sha }}
+          docker push imageuploaderregistry.azurecr.io/image:${{ github.sha }}
     # - name: Tag the Docker image
     #   run: docker tag my-image-name:$(date +%s) imageuploaderregistry.azurecr.io/image:$(date +%s)
     # - name: Push the Docker image
