@@ -37,6 +37,13 @@ jobs:
           docker build . --file Dockerfile --tag my-image-name:${{ github.sha }}
           docker tag my-image-name:${{ github.sha }} imageuploaderregistry.azurecr.io/image:${{ github.sha }}
           docker push imageuploaderregistry.azurecr.io/image:${{ github.sha }}
+    - name: Update Container App Revision
+      uses: azure/container-apps-deploy-action@v1
+      with:
+        acrName: imageuploaderregistry
+        containerAppName: image-uploader
+        resourceGroup: vn
+        imageToDeploy: imageuploaderregistry.azurecr.io/image:${{ github.sha }}
     # - name: Tag the Docker image
     #   run: docker tag my-image-name:$(date +%s) imageuploaderregistry.azurecr.io/image:$(date +%s)
     # - name: Push the Docker image
